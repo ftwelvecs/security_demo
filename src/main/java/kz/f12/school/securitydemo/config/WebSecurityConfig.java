@@ -17,7 +17,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true) // добавляем чтобы заработали @PreAuthorize
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
@@ -25,14 +25,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable() // мы отключаем проверку csrf
                 .authorizeRequests() // авторизовываем запросы
                 .antMatchers("/").permitAll()
-                .antMatchers("/store")
-                    .hasAuthority(Permission.READ.name())
-                .antMatchers( "/store/update")
-                    .hasAuthority(Permission.WRITE.name())
-                .antMatchers( "/store/create")
-                    .hasAuthority(Permission.WRITE.name())
-                .antMatchers( "/store/{id}/delete")
-                    .hasAuthority(Permission.WRITE.name())
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();
