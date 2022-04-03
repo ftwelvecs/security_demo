@@ -1,6 +1,7 @@
 package kz.f12.school.securitydemo.service;
 
 import kz.f12.school.securitydemo.dto.ProductDto;
+import kz.f12.school.securitydemo.enums.ProductType;
 import org.springframework.stereotype.Service;
 
 import java.util.Iterator;
@@ -13,9 +14,9 @@ import java.util.stream.Stream;
 public class StoreService {
 
     private List<ProductDto> products = Stream.of(
-            new ProductDto(1L, "Нан", "Цесна наны", 50),
-            new ProductDto(2L, "Сүт", "Айналайын сүті", 200),
-            new ProductDto(3L, "Жұмыртқа", "Ауыл жұмыртқасы", 200)
+            new ProductDto(1L, "Нан", "Цесна наны", 50, ProductType.FOOD),
+            new ProductDto(2L, "Сүт", "Айналайын сүті", 200, ProductType.FOOD),
+            new ProductDto(3L, "Жұмыртқа", "Ауыл жұмыртқасы", 200, ProductType.FOOD)
     ).collect(Collectors.toList());
 
     public List<ProductDto> getProducts() {

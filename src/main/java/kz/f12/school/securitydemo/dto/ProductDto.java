@@ -1,5 +1,6 @@
 package kz.f12.school.securitydemo.dto;
 
+import kz.f12.school.securitydemo.enums.ProductType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -10,4 +11,5 @@ public class ProductDto {
     private String name;
     private String description;
     private double price;
+    private ProductType type;
 }
