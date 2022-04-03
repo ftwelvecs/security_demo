@@ -22,17 +22,17 @@ public class StoreController {
         return service.getProducts();
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public void create(@RequestBody ProductDto productDto) {
         service.create(productDto);
     }
 
-    @PutMapping
+    @PutMapping("/update")
     public void update(@RequestBody ProductDto productDto) {
         service.update(productDto);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}/delete")
     public void delete(@PathVariable("id") Long productId) {
         service.delete(productId);
     }

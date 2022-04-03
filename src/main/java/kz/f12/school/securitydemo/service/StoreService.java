@@ -3,6 +3,7 @@ package kz.f12.school.securitydemo.service;
 import kz.f12.school.securitydemo.dto.ProductDto;
 import org.springframework.stereotype.Service;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -21,24 +22,33 @@ public class StoreService {
         return products;
     }
 
-    public void update(ProductDto productDto) {
+    public void update(ProductDto newProduct) {
         Optional<ProductDto> optionalProductDto = products.stream()
-                .filter(product -> product.getId().equals(productDto.getId()))
+                .filter(product -> product.getId().equals(newProduct.getId()))
                 .findFirst();
 
         if (optionalProductDto.isPresent()) {
-            ProductDto product = optionalProductDto.get();
-            product.setName(productDto.getName());
-            product.setDescription(productDto.getDescription());
-            product.setPrice(productDto.getPrice());
+            ProductDto oldProduct = optionalProductDto.get();
+            oldProduct.setName(newProduct.getName());
+            oldProduct.setDescription(newProduct.getDescription());
+            oldProduct.setPrice(newProduct.getPrice());
         }
     }
 
     public void create(ProductDto productDto) {
-
+        products.add(productDto);
     }
 
     public void delete(Long productId) {
-
+        /*
+        // Старый подход
+        Iterator<ProductDto> iterator = products.iterator();
+        while (iterator.hasNext()) {
+            ProductDto productDto = iterator.next();
+            if (productDto.getId().equals(productId))
+                iterator.remove();
+        }*/
+        // новый подход
+        products.removeIf(product -> product.getId().equals(productId));
     }
 }
