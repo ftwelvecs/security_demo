@@ -25,9 +25,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable() // мы отключаем проверку csrf
                 .authorizeRequests() // авторизовываем запросы
                 .antMatchers("/").permitAll()
+                // .antMatchers("/report").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .httpBasic();
+                .httpBasic()
+                .and()
+                .formLogin();
     }
 
     @Bean
@@ -42,6 +45,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         .username("user")
                         .password(passwordEncoder().encode("123"))
                         .authorities(Role.USER.getAuthorities())
+                        .build(),
+                User.builder()
+                        .username("moderator")
+                        .password(passwordEncoder().encode("123"))
+                        .authorities(Role.MODERATOR.getAuthorities())
                         .build()
         );
     }

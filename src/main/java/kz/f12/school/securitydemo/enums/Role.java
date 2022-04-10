@@ -6,13 +6,19 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static kz.f12.school.securitydemo.enums.Permission.*;
+
 public enum Role {
     ADMIN(
-            Stream.of(Permission.READ, Permission.WRITE)
+            Stream.of(REPORT_READ, STORE_READ, STORE_WRITE)
                     .collect(Collectors.toSet())
     ),
     USER(
-            Stream.of(Permission.READ)
+            Stream.of(STORE_READ)
+                    .collect(Collectors.toSet())
+    ),
+    MODERATOR(
+            Stream.of(REPORT_READ, REPORT_WRITE)
                     .collect(Collectors.toSet())
     );
 

@@ -19,25 +19,25 @@ public class StoreController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('READ')")
+    @PreAuthorize("hasAuthority('STORE_READ')")
     public List<ProductDto> getProducts() {
         return service.getProducts();
     }
 
     @PostMapping("/create")
-    @PreAuthorize("hasAuthority('WRITE')")
+    @PreAuthorize("hasAuthority('STORE_WRITE')")
     public void create(@RequestBody ProductDto productDto) {
         service.create(productDto);
     }
 
     @PutMapping("/update")
-    @PreAuthorize("hasAuthority('WRITE')")
+    @PreAuthorize("hasAuthority('STORE_WRITE')")
     public void update(@RequestBody ProductDto productDto) {
         service.update(productDto);
     }
 
     @DeleteMapping("/{id}/delete")
-    @PreAuthorize("hasAuthority('WRITE')")
+    @PreAuthorize("hasAuthority('STORE_WRITE')")
     public void delete(@PathVariable("id") Long productId) {
         service.delete(productId);
     }
